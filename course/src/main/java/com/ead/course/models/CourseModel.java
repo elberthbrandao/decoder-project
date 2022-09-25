@@ -27,7 +27,7 @@ public class CourseModel implements Serializable {
     private UUID courseId;
 
     @Column(nullable = false, length = 150)
-    private String nome;
+    private String name;
 
     @Column(nullable = false, length = 250)
     private String description;
