@@ -49,7 +49,7 @@ public class ModuleController {
     }
 
     @DeleteMapping("/courses/{courseId}/modules/{moduleId}")
-    public ResponseEntity<Object> deleteCourse(
+    public ResponseEntity<Object> deleteModule(
         @PathVariable(value = "courseId") UUID courseId,
         @PathVariable(value = "moduleId") UUID moduleId
     ) {
