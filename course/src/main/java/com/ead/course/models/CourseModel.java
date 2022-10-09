@@ -60,6 +60,6 @@ public class CourseModel implements Serializable {
     private Set<ModuleModel> modules;
 
     @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private Set<CourseUserModel> usersCourses;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Set<CourseUserModel> coursesUsers;
 }
