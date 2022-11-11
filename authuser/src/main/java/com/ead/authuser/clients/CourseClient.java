@@ -1,8 +1,8 @@
-package com.ead.course.clients;
+package com.ead.authuser.clients;
 
-import com.ead.course.dtos.ResponsePageDto;
-import com.ead.course.dtos.UserDto;
-import com.ead.course.services.UtilsService;
+import com.ead.authuser.dtos.CourseDto;
+import com.ead.authuser.dtos.ResponsePageDto;
+import com.ead.authuser.services.UtilsService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,20 +28,20 @@ public class CourseClient {
     @Autowired
     UtilsService utilsService;
 
-    @Value("${ead.api.url.authuser}")
-    String REQUEST_URI;
+    @Value("${ead.api.url.course}")
+    String REQUEST_URL_COURSE;
 
-    public Page<UserDto> getAllUsersByCourse(Pageable pageable, UUID courseId) {
-        List<UserDto> searchResult;
-        ResponseEntity<ResponsePageDto<UserDto>> result = null;
+    public Page<CourseDto> getAllCourseByUser(Pageable pageable, UUID userId) {
+        List<CourseDto> searchResult;
+        ResponseEntity<ResponsePageDto<CourseDto>> result = null;
 
-        String url = REQUEST_URI + utilsService.createUrlGetAllUsersByCourse(pageable, courseId);
+        String url = REQUEST_URL_COURSE + utilsService.createUrlGetAllCoursesByUser(pageable, userId);
 
         log.debug("Request URL: {} ", url);
         log.info("Request URL: {} ", url);
 
         try {
-            ParameterizedTypeReference<ResponsePageDto<UserDto>> responseType = new ParameterizedTypeReference<>() {};
+            ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<>() {};
             result = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
             searchResult = result.getBody().getContent();
             log.debug("Response Number of Elements: {} ", searchResult.size());
@@ -49,7 +49,7 @@ public class CourseClient {
             log.error("Error request /courses {} ", e);
         }
 
-        log.info("Ending request /users courseId {} ", courseId);
+        log.info("Ending request /courses userId {} ", userId);
 
         return result.getBody();
     }
