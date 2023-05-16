@@ -1,4 +1,4 @@
-package com.ead.authuser.models;
+package com.ead.course.enums;
 
 public enum ActionType {
     CREATE,
