@@ -40,7 +40,7 @@ public class UserCourseController {
             return ResponseEntity.status(HttpStatus.OK).body("User not found.");
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(courseClient.getAllCourseByUser(pageable, userId));
+        return ResponseEntity.status(HttpStatus.OK).body(courseClient.getAllCourseByUser(userId, pageable));
     }
 
 }
